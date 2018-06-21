@@ -1,15 +1,16 @@
 from random import randint
 
+#Initialize List for board spots
 board = []
 
-for x in range(0, 5):
+#Create list of 5x5 grid
+for x in range(5):
   board.append(["O"] * 5)
 
+#Function to neatly print out game board
 def print_board(board):
   for row in board:
     print(" ".join(row))
-
-print_board(board)
 
 def random_row(board):
   return randint(0, len(board) - 1)
@@ -19,22 +20,24 @@ def random_col(board):
 
 ship_row = random_row(board)
 ship_col = random_col(board)
-print(ship_row)
-print(ship_col)
 
-guess_row = int(input("Guess Row: "))
-guess_col = int(input("Guess Col: "))
+#Game Loop
+for turn in range(4):
+  print_board(board)
+  guess_row = int(input("Guess Row: "))
+  guess_col = int(input("Guess Col: "))
 
-# Write your code below!
-if guess_row == ship_row and guess_col == ship_col:
-  print("Congratulations! You sank my battleship!")
-if guess_row not in range(5) or \
-	 guess_col not in range(5):
-  print("Oops, that's not even in the ocean.")
-elif board[guess_row][guess_col] == 'X':
-  print("You guessed that one already.")
-else:
-  print("You missed my battleship!")
-  board[guess_row][guess_col] = 'X'
-
-print_board(board)
+  if guess_row == ship_row and guess_col == ship_col:
+    print("Congratulations! You sunk my battleship!")
+    break
+  else:
+    if (guess_row < 0 or guess_row > 4) or (guess_col < 0 or guess_col > 4):
+      print("Oops, that's not even in the ocean.")
+    elif(board[guess_row][guess_col] == "X"):
+      print("You guessed that one already.")
+    else:
+      print("You missed my battleship!")
+      board[guess_row][guess_col] = "X"
+    if turn == 3:
+      print("Game Over")
+    print("Turn ", turn + 1)
