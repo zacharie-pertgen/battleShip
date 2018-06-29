@@ -1,4 +1,6 @@
 from random import randint
+import os
+import time
 
 #Initialize List for board spots
 board = []
@@ -21,8 +23,14 @@ def random_col(board):
 ship_row = random_row(board)
 ship_col = random_col(board)
 
+replay = True
+
+#Replay Loop
+#while replay == True:
 #Game Loop
 for turn in range(4):
+  time.sleep(2)
+  os.system('cls')
   print_board(board)
   guess_row = int(input("Guess Row: "))
   guess_col = int(input("Guess Col: "))
